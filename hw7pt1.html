@@ -1,0 +1,351 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="CNIT 133 homework 7">
+    <title>CNIT 133 Homework 7</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <style>
+        body {
+          background-color:cadetblue
+              
+         }
+        header, footer {grid-column: span 4;
+                        }
+         nav {display: inline; padding-bottom: 25px; display: flex; align-items: center;
+             }
+         nav ul{list-style-type:none; padding:0; 
+                  }
+            
+            nav ul li{ display: inline-block;
+                       margin:0 5px;
+                       border:2px solid black;
+                      border-radius: 10px;
+                       margin-right: 350px;
+                       background-color: cadetblue;
+                       text-align:center;
+                       width: 150px;
+                       height: 30px; 
+                       line-height:30px;
+                        margin-bottom: 5px;}
+         nav ul li a {text-decoration: none; font-weight: bold; color:white;
+                        }
+         
+         ul li { list-style-type: none; 
+          }
+        
+         
+        
+        @font-face {
+            font-family: "technobold";
+            src: url(../../fonts/technobold.ttf);
+        }
+
+        @font-face {
+            font-family: "helveticaneue";
+            src: url(../../fonts/HelveticaNeue-Regular.woff);
+        }
+
+        .title-font {
+            font-family: "technobold";
+            font-weight: bold;
+            font-size: 5.5vh;
+        }
+        
+        .banner {
+            background-image: radial-gradient(#beecfe, #a5d3e5, #029cd9);
+            max-width: 100%;
+            height: 14vh;
+        }
+
+        .banner h5 {
+            font-size: 3.0vh;
+        }
+
+        .small_font {
+            font-size: 0.8em;
+        }
+
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Avant Garde', 'Avantgarde', 'Century Gothic', 'CenturyGothic', 'AppleGothic', sans-serif;
+        }
+
+        li {
+            font-family: "helveticaneue";
+        }
+
+        img.centered {
+            display: block;
+            margin: auto auto;
+        }
+
+        .blueish-bg {
+            background-image: linear-gradient(#c7dce4, #adffd2);
+        }
+
+        .greenish-bg {
+            background-image: linear-gradient(#adff90, #daf590);
+        }
+
+        .redish-bg {
+            background-image: linear-gradient(#ffb590, #ffadb9);
+        }
+
+        .sansserif {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+        
+        .serif {
+            font-family: 'IBM Plex Serif', serif;
+        }
+        
+        .font-lg {
+            font-size: 1.25rem;
+        }
+        
+        .font-med {
+            font-size: 1.0rem;
+        }
+        
+        .font-sm {
+            font-size: 0.9rem;
+        }
+        
+        .weight-lt {
+            font-weight: 200;
+        }
+        
+        .weight-md {
+            font-weight: 400;
+        }
+        
+        .weight-hv {
+            font-weight: 700;
+        }
+        
+        .fstyle-normal {
+            font-style: normal;
+        }
+        
+        .fstyle-italic {
+            font-style: italic;
+        }
+
+        .centerme {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .footer {
+            color: #848b91;
+            background: #2c3e4d;
+        }
+        
+    </style>
+    <script>
+        
+    $(document).ready(function(){
+        function toggleDropdown (e) {
+            let _d = $(e.target).closest('.dropdown'),
+            _m = $('.dropdown-menu', _d);
+            setTimeout(function(){
+                let shouldOpen = e.type !== 'click' && _d.is(':hover');
+                _m.toggleClass('show', shouldOpen);
+                _d.toggleClass('show', shouldOpen);
+                $('[data-toggle="dropdown"]', _d).attr('aria-expanded', shouldOpen);
+                }, e.type === 'mouseleave' ? 300 : 0);
+            }
+
+            $('body')
+            .on('mouseenter mouseleave','.dropdown',toggleDropdown)
+            .on('click', '.dropdown-menu a', toggleDropdown);
+    
+    });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('select[name="bgColorSelect"]').onchange = bgChangeEventHandler;
+        }, false);
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('select[name="fontSelect"]').onchange = fontChangeEventHandler;
+        }, false);
+
+        function bgChangeEventHandler(event) {
+            mainDiv = document.getElementById("main");
+            
+            if (event.target.value == "blueish" && !mainDiv.classList.contains("blueish-bg")) {
+                mainDiv.classList.remove("greenish-bg", "redish-bg");
+                mainDiv.classList.add("blueish-bg");
+            }
+            if (event.target.value == "greenish" && !mainDiv.classList.contains("greenish-bg")) {
+                mainDiv.classList.remove("blueish-bg", "redish-bg");
+                mainDiv.classList.add("greenish-bg");
+            }
+            if (event.target.value == "redish" && !mainDiv.classList.contains("redish-bg")) {
+                mainDiv.classList.remove("blueish-bg", "greenish-bg");
+                mainDiv.classList.add("redish-bg");
+            }
+            
+            // set the bg color select back to its placeholder value
+            document.getElementById("bgColorSelect").selectedIndex = "0"; 
+        }
+        
+        function fontChangeEventHandler(event) {
+            mainDiv = document.getElementById("main");
+            
+            if (event.target.value == "sansserif" && !mainDiv.classList.contains("sansserif")) {
+                mainDiv.classList.remove("serif");
+                mainDiv.classList.add("sansserif");
+            }
+            if (event.target.value == "serif" && !mainDiv.classList.contains("serif")) {
+                mainDiv.classList.remove("sansserif");
+                mainDiv.classList.add("serif");
+            }
+            
+            // set the font select back to its placeholder value
+            document.getElementById("fontSelect").selectedIndex = "0"; 
+        }
+        
+        function fontSizeChange(size) {
+            mainDiv = document.getElementById("main");
+            
+            if (size == "sm" && !mainDiv.classList.contains("font-sm")) {
+                mainDiv.classList.remove("font-med", "font-lg");
+                mainDiv.classList.add("font-sm");
+            }
+            if (size == "med" && !mainDiv.classList.contains("font-med")) {
+                mainDiv.classList.remove("font-sm", "font-lg");
+                mainDiv.classList.add("font-med");
+            }
+            if (size == "lg" && !mainDiv.classList.contains("font-lg")) {
+                mainDiv.classList.remove("font-sm", "font-med");
+                mainDiv.classList.add("font-lg");
+            }
+        }
+        
+        function fontStyleChange(style) {
+            mainDiv = document.getElementById("main");
+            
+            if (style == "normal" && !mainDiv.classList.contains("fstyle-normal")) {
+                mainDiv.classList.remove("fstyle-italic");
+                mainDiv.classList.add("fstyle-normal");
+            }
+            if (style == "italic" && !mainDiv.classList.contains("fstyle-italic")) {
+                mainDiv.classList.remove("fstyle-normal");
+                mainDiv.classList.add("fstyle-italic");
+            }
+        }
+        
+        function fontWeightBtnHandler(weight) {
+            mainDiv = document.getElementById("main");
+            if (weight == "light" && !mainDiv.classList.contains("weight-lt")) {
+                mainDiv.classList.remove("weight-md", "weight-hv");
+                mainDiv.classList.add("weight-lt");
+            }
+            if (weight == "medium" && !mainDiv.classList.contains("weight-md")) {
+                mainDiv.classList.remove("weight-lt", "weight-hv");
+                mainDiv.classList.add("weight-md");
+            }
+            if (weight == "heavy" && !mainDiv.classList.contains("weight-hv")) {
+                mainDiv.classList.remove("weight-lt", "weight-md");
+                mainDiv.classList.add("weight-hv");
+            }
+        }
+        
+    </script>
+    
+</head>
+
+<body>
+    <nav>
+    <ul>
+            <li><a href="https://pettycarlos.github.io/CNIT-133-Homework-1/">Homepage</a></li>
+             <li><a href="https://pettycarlos.github.io/hw2/">Homework 2</a></li>
+            <li><a href= "hw3.html">Homework 3</a></li>
+            <li><a href= "https://pettycarlos.github.io/CNIT-133-hw4/">Homework 4</a></li>
+            <li><a href="https://pettycarlos.github.io/hw5/">Homework 5</a></li>
+            <li><a href="https://pettycarlos.github.io/hw6/">Homework 6</a></li>
+            <li><a href= "https://pettycarlos.github.io/hw7/">Homework 7</a></li>
+            <li><a href="https://pettycarlos.github.io/hw8/">Homework 8</a></li>
+            
+        </ul>
+            </nav>
+            
+        
+            <ol>
+  <li><a href="hw7pt1.html">Part 1 - Page Layout and Formatting </a></li>
+  <li><a href="hw7pt2.html">Part 2 - Top Navigation Bar </a></li>
+  
+</ol>
+
+    
+    <div id="main" class="container-fluid blueish-bg sansserif font-med weight-md fstyle-normal px-3 py-3" style="min-height: 70vmin">
+        <div class="row">
+            <div>
+            </div>
+            <div>
+                <p> Page Layout through the use of the className property (CSS).
+                    
+                </p>
+            </div>
+            <div class="col-sm-2 ml-auto mr-1">
+                <!-- <label for="bgColorSelect">Change background:</label> -->
+                <select id="bgColorSelect" name="bgColorSelect">
+                    <option value="">Background theme</option>
+                    <option value="blueish">Bluish</option>
+                    <option value="greenish">Greenish</option>
+                    <option value="redish">Redish</option>
+                </select>
+                <select id="fontSelect" name="fontSelect">
+                    <option value="">Font theme</option>
+                    <option value="sansserif">Sans Serif</option>
+                    <option value="serif">Serif</option>
+                </select>
+                <div>
+                    <small>Font size:</small>
+                </div>
+                <div>
+                    <input type="radio" id="font-sm" name="fsRadios" value="small" onclick="fontSizeChange('sm');" />
+                    <label for="font-sm">Sm</label>
+
+                    <input type="radio" id="font-med" name="fsRadios" value="medium" onclick="fontSizeChange('med');" />
+                    <label for="font-med">Med</label>
+
+                    <input type="radio" id="font-lg" name="fsRadios" value="large" onclick="fontSizeChange('lg');" />
+                    <label for="font-lg">Lg</label>
+                </div>
+                <div>
+                    <small>Font style:</small>
+                </div>
+                <div>
+                    <input type="radio" id="fStyle-normal" name="fStyleRadios" value="normal" onclick="fontStyleChange('normal');" />
+                    <label for="fStyle-normal">Normal</label>
+
+                    <input type="radio" id="fStyle-italic" name="fStyleRadios" value="italic" onclick="fontStyleChange('italic');" />
+                    <label for="fStyle-italic">Italic</label>
+                </div>
+                <div>
+                    <small>Font weight:</small>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-sm btn-outline-dark" onclick="fontWeightBtnHandler('light')"><small>Light</small></button>
+                    <button type="button" class="btn btn-sm btn-outline-dark" onclick="fontWeightBtnHandler('medium')"><small>Medium</small></button>
+                    <button type="button" class="btn btn-sm btn-outline-dark" onclick="fontWeightBtnHandler('heavy')"><small>Heavy</small></button>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</body>
+
+</html>
